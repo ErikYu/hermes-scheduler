@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GantterComponent } from './gantter.component';
+import { TaskGanttComponent } from './task-gantt.component';
 
-describe('GantterComponent', () => {
-  let component: GantterComponent;
-  let fixture: ComponentFixture<GantterComponent>;
+describe('TaskGanttComponent', () => {
+  let component: TaskGanttComponent;
+  let fixture: ComponentFixture<TaskGanttComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GantterComponent ]
+      declarations: [ TaskGanttComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GantterComponent);
+    fixture = TestBed.createComponent(TaskGanttComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

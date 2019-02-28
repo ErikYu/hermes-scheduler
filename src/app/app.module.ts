@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials/materials.module';
-import { GantterComponent } from './gantter/gantter.component';
+import { TaskGanttComponent } from './task-gantt/task-gantt.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GantterComponent
+    TaskGanttComponent
   ],
   imports: [
     BrowserModule,

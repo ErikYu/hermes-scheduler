@@ -19,15 +19,15 @@ export class GantterComponent implements OnInit {
     if (gantt.$groupMode) {
       input.value = 'show gantt view';
 
-      let groups = gantt.$resourcesStore.getItems().map(function(item) {
-        let group = gantt.copy(item);
+      const groups = gantt.$resourcesStore.getItems().map((item) => {
+        const group = gantt.copy(item);
         group.group_id = group.id;
         group.id = gantt.uid();
         return group;
       });
 
       gantt.groupBy({
-        groups: groups,
+        groups,
         relation_property: gantt.config.resource_property,
         group_id: 'group_id',
         group_text: 'text',
@@ -41,18 +41,18 @@ export class GantterComponent implements OnInit {
   }
 
   shouldHighlightTask(task) {
-    let store = gantt.$resourcesStore;
-    let taskResource = task[gantt.config.resource_property];
-    let selectedResource = store.getSelectedId();
-    if (taskResource == selectedResource || store.isChildOf(taskResource, selectedResource)) {
+    const store = gantt.$resourcesStore;
+    const taskResource = task[gantt.config.resource_property];
+    const selectedResource = store.getSelectedId();
+    if (taskResource === selectedResource || store.isChildOf(taskResource, selectedResource)) {
       return true;
     }
   }
 
   getAllocatedValue(tasks, resource) {
     let result = 0;
-    tasks.forEach(function(item) {
-      let assignments = gantt.getResourceAssignments(resource.id, item.id);
+    tasks.forEach((item) => {
+      const assignments = gantt.getResourceAssignments(resource.id, item.id);
       assignments.forEach((assignment) => {
         result += Number(assignment.value);
       });
@@ -71,7 +71,7 @@ export class GantterComponent implements OnInit {
       return -1;
     }
 
-    let val = date.valueOf();
+    const val = date.valueOf();
     if (!this.cap[val + resource.id]) {
       this.cap[val + resource.id] = [0, 1, 2, 3][Math.floor(Math.random() * 100) % 4];
     }
@@ -79,12 +79,12 @@ export class GantterComponent implements OnInit {
   }
 
   shouldHighlightResource(resource) {
-    let selectedTaskId = gantt.getState().selected_task;
+    const selectedTaskId = gantt.getState().selected_task;
     if (gantt.isTaskExists(selectedTaskId)) {
-      let selectedTask = gantt.getTask(selectedTaskId);
-      let selectedResource = selectedTask[gantt.config.resource_property];
+      const selectedTask = gantt.getTask(selectedTaskId);
+      const selectedResource = selectedTask[gantt.config.resource_property];
 
-      if (resource.id == selectedResource) {
+      if (resource.id === selectedResource) {
         return true;
       } else if (gantt.$resourcesStore.isChildOf(selectedResource, resource.id)) {
         return true;
@@ -95,8 +95,8 @@ export class GantterComponent implements OnInit {
 
   getResourceAssignments(resourceId) {
     let assignments;
-    let store = gantt.getDatastore(gantt.config.resource_store);
-    let resource = store.getItem(resourceId);
+    const store = gantt.getDatastore(gantt.config.resource_store);
+    const resource = store.getItem(resourceId);
 
     if (resource.$level === 0) {
       assignments = [];
@@ -113,7 +113,7 @@ export class GantterComponent implements OnInit {
 
   initGantt() {
     gantt.templates.grid_row_class = (start, end, task) => {
-      let css = [];
+      const css = [];
       if (gantt.hasChild(task.id)) {
         css.push('folder_row');
       }
@@ -137,7 +137,7 @@ export class GantterComponent implements OnInit {
     };
 
     gantt.templates.task_cell_class = (task, date) => {
-      if (!gantt.isWorkTime({ date: date, task: task })) {
+      if (!gantt.isWorkTime({ date, task })) {
         return 'week_end';
       }
       return '';
@@ -162,7 +162,7 @@ export class GantterComponent implements OnInit {
         if (gantt.isWorkTime({ date: start_date, task: gantt.getTask(resource.$task_id) })) {
           if (start_date.valueOf() < resource.end_date.valueOf() &&
             end_date.valueOf() > resource.start_date.valueOf()) {
-            let assignment = gantt.getResourceAssignments(resource.$resource_id, resource.$task_id)[0];
+            const assignment = gantt.getResourceAssignments(resource.$resource_id, resource.$task_id)[0];
             return assignment.value;
           } else {
             return '&ndash;';
@@ -209,15 +209,15 @@ export class GantterComponent implements OnInit {
     //   }
     // }
 
-    let UNASSIGNED_ID = 5;
+    const UNASSIGNED_ID = 5;
     // let WORK_DAY = 8;
     this.initGantt();
 
 
 
-    let resourceTemplates = {
+    const resourceTemplates = {
       grid_row_class: (start, end, resource) => {
-        let css = [];
+        const css = [];
         if (resource.$level === 0) {
           css.push('folder_row');
           css.push('group_row');
@@ -228,7 +228,7 @@ export class GantterComponent implements OnInit {
         return css.join(' ');
       },
       task_row_class: (start, end, resource) => {
-        let css = [];
+        const css = [];
         if (this.shouldHighlightResource(resource)) {
           css.push('highlighted_resource');
         }
@@ -251,7 +251,7 @@ export class GantterComponent implements OnInit {
 
 
 
-    let resourceConfig = {
+    const resourceConfig = {
       scale_height: 30,
       row_height: 45,
       subscales: [],
@@ -263,17 +263,17 @@ export class GantterComponent implements OnInit {
         },
         {
           name: 'progress', label: 'Complete', align: 'center', template: (resource) => {
-            let store = gantt.getDatastore(gantt.config.resource_store);
+            const store = gantt.getDatastore(gantt.config.resource_store);
             let totalToDo = 0;
             let totalDone = 0;
             let completion = 0;
 
-            if (resource.$level == 2) {
+            if (resource.$level === 2) {
               completion = resource.progress * 100;
             } else {
-              let assignments = this.getResourceAssignments(resource.id);
+              const assignments = this.getResourceAssignments(resource.id);
               assignments.forEach((assignment) => {
-                let task = gantt.getTask(assignment.task_id);
+                const task = gantt.getTask(assignment.task_id);
                 totalToDo += task.duration;
                 totalDone += task.duration * (task.progress || 0);
               });
@@ -290,13 +290,13 @@ export class GantterComponent implements OnInit {
         {
           name: 'workload', label: 'Workload', align: 'center', template: (resource) => {
             let totalDuration = 0;
-            if (resource.$level == 2) {
-              let assignment = gantt.getResourceAssignments(resource.$resource_id, resource.$task_id)[0];
+            if (resource.$level === 2) {
+              const assignment = gantt.getResourceAssignments(resource.$resource_id, resource.$task_id)[0];
               totalDuration = resource.duration * assignment.value;
             } else {
-              let assignments = this.getResourceAssignments(resource.id);
+              const assignments = this.getResourceAssignments(resource.id);
               assignments.forEach((assignment) => {
-                let task = gantt.getTask(assignment.task_id);
+                const task = gantt.getTask(assignment.task_id);
                 totalDuration += Number(assignment.value) * task.duration;
               });
 
@@ -310,13 +310,13 @@ export class GantterComponent implements OnInit {
 
         {
           name: 'capacity', label: 'Capacity', align: 'center', template: (resource) => {
-            if (resource.$level == 2) {
+            if (resource.$level === 2) {
               return resource.duration * this.WORK_DAY + 'h';
             }
-            let store = gantt.getDatastore(gantt.config.resource_store);
-            let n = (resource.$level === 0) ? store.getChildren(resource.id).length : 1;
+            const store = gantt.getDatastore(gantt.config.resource_store);
+            const n = (resource.$level === 0) ? store.getChildren(resource.id).length : 1;
 
-            let state = gantt.getState();
+            const state = gantt.getState();
 
             return gantt.calculateDuration(state.min_date, state.max_date) * n * this.WORK_DAY + 'h';
           }
@@ -337,24 +337,24 @@ export class GantterComponent implements OnInit {
       { name: 'start_date', align: 'center', width: 80, resize: true },
       {
         name: 'owner', align: 'center', width: 80, label: 'Owner', template: (task) => {
-          if (task.type == gantt.config.types.project) {
+          if (task.type === gantt.config.types.project) {
             return '';
           }
 
-          let store = gantt.getDatastore('resource');
-          let assignments = task[gantt.config.resource_property];
+          const store = gantt.getDatastore('resource');
+          const assignments = task[gantt.config.resource_property];
 
           if (!assignments || !assignments.length) {
             return 'Unassigned';
           }
 
-          if (assignments.length == 1) {
+          if (assignments.length === 1) {
             return store.getItem(assignments[0].resource_id).text;
           }
 
           let result = '';
           assignments.forEach((assignment) => {
-            let owner = store.getItem(assignment.resource_id);
+            const owner = store.getItem(assignment.resource_id);
             if (!owner) {
               return;
             }
@@ -431,7 +431,7 @@ export class GantterComponent implements OnInit {
     gantt.init('gantt_here');
 
     gantt.attachEvent('onTaskLoading', (task) => {
-      let ownerValue = task[gantt.config.resource_property];
+      const ownerValue = task[gantt.config.resource_property];
 
       if (!task.$virtual && (!ownerValue || !Array.isArray(ownerValue) || !ownerValue.length)) {
         task[gantt.config.resource_property] = [{ resource_id: 5, value: 0 }];
@@ -441,11 +441,11 @@ export class GantterComponent implements OnInit {
     gantt.load('../../assets/lib/gantt/demo.json');
 
     gantt.$resourcesStore.attachEvent('onParse', () => {
-      let people = [];
+      const people = [];
 
       gantt.$resourcesStore.eachItem((res) => {
         if (res.$level === 1) {
-          let copy = gantt.copy(res);
+          const copy = gantt.copy(res);
           copy.key = res.id;
           copy.label = res.text;
           copy.unit = 'hours';

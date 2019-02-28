@@ -13,10 +13,7 @@
             "app",
             "kebab-case"
         ],
-        "prefer-const": false,
-        "object-literal-shorthand": false,
-        "only-arrow-functions": false,
-        "triple-equals": false,
+//        "prefer-const": false,
         "variable-name": false
     }
 }

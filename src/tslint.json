@@ -12,6 +12,11 @@
             "element",
             "app",
             "kebab-case"
-        ]
+        ],
+        "prefer-const": false,
+        "object-literal-shorthand": false,
+        "only-arrow-functions": false,
+        "triple-equals": false,
+        "variable-name": false
     }
 }

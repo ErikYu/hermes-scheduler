@@ -1,8 +1,6 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <!--<button mat-flat-button color="primary" (click)="saveData()">Save</button>-->
-  </mat-toolbar-row>
-</mat-toolbar>
-<button mat-flat-button color="primary" (click)="showGroups()">{{grouped ? 'Raw' : 'Group by owner'}}</button>
-
-<div #gantt_here style='float: left; width: 100%; height: calc(100% - 70px);'></div>
+<app-header [headerBtn]="btnTmpl" [headerTitle]="'Gantt'">
+  <ng-template #btnTmpl>
+    <button mat-flat-button color="primary" (click)="showGroups()">{{grouped ? 'Raw' : 'Group by owner'}}</button>
+  </ng-template>
+</app-header>
+<div #gantt_here style='float: left; width: 100%; height: 600px;'></div>

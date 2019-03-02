@@ -1,9 +1,12 @@
-<app-header [headerBtn]="btnTmpl"></app-header>
-<ng-template #btnTmpl>
-  <button mat-flat-button color="primary" (click)="create()">Create</button>
-  <button mat-flat-button color="warn">Delete</button>
-</ng-template>
-<mat-card style="margin: 10px">
+<app-header [headerBtn]="btnTmpl" [headerTitle]="'Person'">
+  <ng-template #btnTmpl>
+    <button mat-flat-button color="primary" (click)="create()">Create</button>
+    <button mat-flat-button color="warn">Delete</button>
+  </ng-template>
+
+</app-header>
+
+<mat-card>
   <table mat-table style="width: 100%" [dataSource]="dataSource">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> No. </th>

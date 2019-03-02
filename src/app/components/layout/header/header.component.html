@@ -24,6 +24,9 @@
 <!--</mat-grid-list>-->
 
 <div class="cpn-header">
+  <div class="cpn-header-title">
+    <ng-container *ngIf="isHeaderTitleString; else headerTitleTmpl">{{headerTitle}}</ng-container>
+  </div>
   <div class="cpn-header-button">
     <ng-container *ngIf="false; else headerBtnTmpl">{{headerBtn}}</ng-container>
   </div>

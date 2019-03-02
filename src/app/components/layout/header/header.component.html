@@ -1,0 +1,37 @@
+<!--<div class="header-zone clearfix">-->
+  <!--<div nz-row>-->
+    <!--<div nz-col [nzSpan]="'10'">-->
+      <!--<div class="header-title">-->
+        <!--<ng-container *ngIf="isHeaderTitleString; else headerTitleTmpl">{{headerTitle}}</ng-container>-->
+      <!--</div>-->
+      <!--<div class="header-btn-area">-->
+        <!--<ng-container *ngIf="false; else headerBtnTmpl">{{headerBtn}}</ng-container>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div nz-col [nzSpan]="'14'">-->
+      <!--<div>-->
+        <!--<ng-template [ngTemplateOutlet]="headerSearch"></ng-template>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<mat-grid-list cols="4" rowHeight="60px">-->
+  <!--<mat-grid-tile [colspan]="4">-->
+    <!--<div class="header-btn-area">-->
+    <!--<ng-container *ngIf="false; else headerBtnTmpl">{{headerBtn}}</ng-container>-->
+    <!--</div>-->
+  <!--</mat-grid-tile>-->
+<!--</mat-grid-list>-->
+
+<div class="cpn-header">
+  <div class="cpn-header-button">
+    <ng-container *ngIf="false; else headerBtnTmpl">{{headerBtn}}</ng-container>
+  </div>
+</div>
+
+<ng-template #headerTitleTmpl>
+  <ng-template [ngTemplateOutlet]="headerTitle"></ng-template>
+</ng-template>
+<ng-template #headerBtnTmpl>
+  <ng-template [ngTemplateOutlet]="headerBtn"></ng-template>
+</ng-template>

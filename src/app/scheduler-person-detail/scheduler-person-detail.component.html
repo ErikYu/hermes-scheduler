@@ -1,0 +1,26 @@
+<app-header [headerBtn]="btnTmpl"></app-header>
+<ng-template #btnTmpl>
+  <button mat-flat-button color="accent" (click)="back()">Back</button>
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</ng-template>
+
+<mat-card style="margin: 10px">
+  <form [formGroup]="validateForm">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name">
+      <mat-error *ngIf="validateForm.get('name').hasError('required')">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Job" formControlName="job">
+        <mat-option *ngFor="let job of allJobs" [value]="job.value">
+          {{job.label}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="validateForm.get('job').hasError('required')">
+        Please choose a job
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-card>

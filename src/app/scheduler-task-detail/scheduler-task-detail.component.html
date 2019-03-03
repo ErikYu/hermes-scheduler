@@ -1,7 +1,7 @@
 <app-header headerTitle="Task"></app-header>
 
 <mat-card >
-  <form [formGroup]="validateForm">
+  <form [formGroup]="validateForm" *ngIf="validateForm">
     <mat-form-field style="margin-right: 10px;">
       <input matInput formControlName="title" placeholder="Title">
       <mat-error *ngIf="validateForm.get('title').hasError('required')">
@@ -49,6 +49,6 @@
       <textarea matInput formControlName="content" placeholder="Detail"></textarea>
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="save()">Save</button>
-    <button mat-flat-button color="warn">Back</button>
+    <button mat-flat-button color="warn" (click)="back()">Back</button>
   </form>
 </mat-card>

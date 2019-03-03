@@ -1,0 +1,54 @@
+<app-header headerTitle="Task"></app-header>
+
+<mat-card >
+  <form [formGroup]="validateForm">
+    <mat-form-field style="margin-right: 10px;">
+      <input matInput formControlName="title" placeholder="Title">
+      <mat-error *ngIf="validateForm.get('title').hasError('required')">
+        Please enter a valid title
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="margin-right: 10px;">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="start_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field style="margin-right: 10px;">
+      <input matInput type="number" formControlName="duration" placeholder="Duration">
+      <mat-error *ngIf="validateForm.get('duration').hasError('required')">
+        Please enter a valid duration
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="margin-right: 10px;">
+      <mat-select placeholder="Job Type" formControlName="job_type">
+        <mat-option *ngFor="let job of allJobs" [value]="job.value">
+          {{job.label}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="validateForm.get('job_type').hasError('required')">
+        Please choose a job type
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="margin-right: 10px;">
+      <mat-select placeholder="Person" formControlName="person_id">
+        <mat-option *ngFor="let person of allPeople" [value]="person.value">
+          {{person.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="margin-right: 10px;">
+      <input matInput type="number" formControlName="work_hour" placeholder="Work Hour">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%;">
+      <textarea matInput formControlName="content" placeholder="Detail"></textarea>
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="save()">Save</button>
+    <button mat-flat-button color="warn">Back</button>
+  </form>
+</mat-card>

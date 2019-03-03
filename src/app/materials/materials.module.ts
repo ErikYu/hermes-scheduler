@@ -12,6 +12,10 @@ import {
   MatSelectModule,
   MatMenuModule,
   MatDialogModule,
+  MatRippleModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatIconModule,
 } from '@angular/material';
 
 
@@ -29,6 +33,10 @@ import {
     MatSelectModule,
     MatMenuModule,
     MatDialogModule,
+    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
   ],
   exports: [
     MatButtonModule,
@@ -43,6 +51,10 @@ import {
     MatSelectModule,
     MatMenuModule,
     MatDialogModule,
+    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
   ]
 })
 export class MaterialsModule { }

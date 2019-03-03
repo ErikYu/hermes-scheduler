@@ -1,0 +1,35 @@
+<app-header [headerBtn]="btnTmpl" [headerTitle]="'Project'">
+</app-header>
+
+<div style="display: flex; flex-wrap: wrap;">
+  <mat-card *ngFor="let project of allProjects" style="width: 20%; margin-right: 10px; margin-bottom: 10px;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <button mat-mini-fab color="primary" (click)="goTask(project.id)">
+          {{project.name[0]}}
+        </button>
+      </div>
+
+      <mat-card-title>
+        {{project.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{project.sub_name}}
+      </mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-content>
+      {{project.description}}
+      {{project.deadline}}
+    </mat-card-content>
+    <!--<mat-card-footer>-->
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="edit(project)">Edit</button>
+        <button mat-stroked-button color="warn" (click)="delete(project.id)">Delete</button>
+      </mat-card-actions>
+    <!--</mat-card-footer>-->
+  </mat-card>
+  <div (click)="create()" matRipple style="display: flex; align-items: center; justify-content: center; width: 20%; height: 160px; background: #fff; cursor: pointer;">
+    +
+  </div>
+</div>

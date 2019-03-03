@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { SchedulerPerson } from '../models/scheduler-person.model';
 import { SchedulerPersonService } from './scheduler-person.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-scheduler-person',
@@ -24,7 +23,6 @@ export class SchedulerPersonComponent implements OnInit {
   constructor(
     private _person: SchedulerPersonService,
     private _router: Router,
-    private _dialog: MatDialog,
   ) {}
 
   getData(e) {

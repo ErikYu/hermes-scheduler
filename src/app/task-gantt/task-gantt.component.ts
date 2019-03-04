@@ -47,6 +47,12 @@ export class TaskGanttComponent implements OnInit {
 
   saveData() {
     console.log(this.data);
+    this.data.data = this.data.data.map(i => ({
+      ...i,
+      start_date: format(i.start_date, 'YYYY-MM-DD HH:mm:ss')
+    }));
+    this._tastGantt.saveTasks(this.projectId, this.data).subscribe(res => {
+    });
   }
 
   ngOnInit() {

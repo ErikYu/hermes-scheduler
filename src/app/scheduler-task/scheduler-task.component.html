@@ -1,7 +1,7 @@
 <app-header headerTitle="Task" [headerBtn]="btnTmpl">
   <ng-template #btnTmpl>
-    <button mat-flat-button color="primary" (click)="create()">Create</button>
-    <button mat-flat-button color="warn">Delete</button>
+    <!--<button mat-flat-button color="primary" (click)="create()">Create</button>-->
+    <!--<button mat-flat-button color="warn">Delete</button>-->
   </ng-template>
 </app-header>
 
@@ -41,6 +41,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons (page)="getDatalist($event)" [length]="count"></mat-paginator>
-
+  <mat-card-footer style="display: flex; align-items: center; justify-content: flex-end">
+    <button mat-flat-button color="primary" (click)="create()">Create</button>
+    <!--<button mat-flat-button color="warn">Delete</button>-->
+    <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons (page)="getDatalist($event)" [length]="count"></mat-paginator>
+    <div style="clear: both"></div>
+  </mat-card-footer>
 </mat-card>

@@ -49,7 +49,7 @@ export class TaskGanttService {
     return this.http.get<DetailResponse<GanttData>>(`/api/scheduler/project/${projectId}/gantt`);
   }
 
-  saveTasks(): Observable<any> {
-    return of();
+  saveTasks(projectId, payload): Observable<any> {
+    return this.http.put(`/api/scheduler/project/${projectId}/gantt`, payload);
   }
 }

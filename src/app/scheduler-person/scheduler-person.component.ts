@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SchedulerPersonComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'code', 'job', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'code', 'job_value', 'actions'];
   dataSource = new MatTableDataSource<SchedulerPerson>([]);
   count = 0;
 

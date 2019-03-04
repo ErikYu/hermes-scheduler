@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { MaterialsModule } from './materials/materials.module';
 import { ComponentsModule } from './components/components.module';
 import { OptionsStore } from './shared/options.store';
+import { NoopInterceptor } from './shared/interceptors';
 import { TaskGanttComponent } from './task-gantt/task-gantt.component';
 import { SchedulerTaskComponent } from './scheduler-task/scheduler-task.component';
 import { SchedulerPersonComponent } from './scheduler-person/scheduler-person.component';
@@ -40,6 +41,7 @@ import { SchedulerTaskDetailComponent } from './scheduler-task-detail/scheduler-
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'zh-CN'},
+    { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
     OptionsStore,
   ],
   bootstrap: [AppComponent],

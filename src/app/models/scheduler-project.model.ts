@@ -5,4 +5,8 @@ export interface SchedulerProject {
   description?: string;
   deadline?: string;
   editable?: boolean;
+  task_count?: number;
+  finished_count?: number;
+  unassigned_count?: number;
+  confirmDelete?: boolean;
 }

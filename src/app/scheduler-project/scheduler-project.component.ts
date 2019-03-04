@@ -54,10 +54,15 @@ export class SchedulerProjectComponent implements OnInit {
     this._router.navigate(['/scheduler/gantt', id]);
   }
 
-  delete(id) {
-    this._project.deleteProject(id).subscribe(res => {
-      this.getData({pageSize: 10, pageIndex: 0});
-    });
+  delete(project: SchedulerProject) {
+    if (project.confirmDelete) {
+      this._project.deleteProject(project.id).subscribe(res => {
+        this.getData({pageSize: 10, pageIndex: 0});
+      });
+      project.confirmDelete = false;
+    } else {
+      project.confirmDelete = true;
+    }
   }
 
   goTask(projectId: number) {

@@ -9,7 +9,6 @@
           {{project.name[0]}}
         </button>
       </div>
-
       <mat-card-title>
         {{project.name}}
       </mat-card-title>
@@ -21,12 +20,15 @@
     <mat-card-content>
       <p><b>Desc:</b> {{project.description}}</p>
       <p><b>Deadline:</b> {{project.deadline}}</p>
+      <p><b>Status:</b> {{project.finished_count}} / {{project.task_count}}</p>
+      <p><b>Unassigned:</b> {{project.unassigned_count}}</p>
     </mat-card-content>
     <!--<mat-card-footer>-->
       <mat-card-actions>
-        <button mat-stroked-button color="accent" (click)="gantt(project.id)">Gantt</button>
+        <button mat-flat-button color="accent" (click)="gantt(project.id)">Gantt</button>
         <button mat-stroked-button color="primary" (click)="edit(project)">Edit</button>
-        <button mat-stroked-button color="warn" (click)="delete(project.id)">Delete</button>
+        <button *ngIf="!project.confirmDelete" style="float: right" mat-stroked-button color="warn" (click)="delete(project)">Delete</button>
+        <button *ngIf="project.confirmDelete" style="float: right" mat-flat-button color="warn" (click)="delete(project)">Delete</button>
       </mat-card-actions>
     <!--</mat-card-footer>-->
   </mat-card>

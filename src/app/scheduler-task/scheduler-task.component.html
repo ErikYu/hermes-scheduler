@@ -16,11 +16,23 @@
       <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
     </ng-container>
     <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef>Duration</th>
+      <th mat-header-cell *matHeaderCellDef>Duration (Day)</th>
       <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
     </ng-container>
+    <ng-container matColumnDef="job_type_value">
+      <th mat-header-cell *matHeaderCellDef>Job Type</th>
+      <td mat-cell *matCellDef="let element"> {{element.job_type_value}} </td>
+    </ng-container>
+    <ng-container matColumnDef="person_name">
+      <th mat-header-cell *matHeaderCellDef>Person</th>
+      <td mat-cell *matCellDef="let element"> {{element.person_name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="work_hour">
+      <th mat-header-cell *matHeaderCellDef>Work Hour</th>
+      <td mat-cell *matCellDef="let element"> {{element.work_hour}} </td>
+    </ng-container>
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
         <button mat-button (click)="edit(element.id)" color="primary">Edit</button>
         <button mat-button (click)="delete(element.id)" color="warn">Delete</button>

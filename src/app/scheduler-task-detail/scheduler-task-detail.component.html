@@ -45,6 +45,14 @@
       <input matInput type="number" formControlName="work_hour" placeholder="Work Hour">
     </mat-form-field>
 
+    <mat-form-field style="margin-right: 10px;">
+      <mat-select placeholder="Depend On" formControlName="depend_id">
+        <mat-option *ngFor="let task of allTasks" [value]="task.value">
+          {{task.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field style="width: 100%;">
       <textarea matInput formControlName="content" placeholder="Detail"></textarea>
     </mat-form-field>

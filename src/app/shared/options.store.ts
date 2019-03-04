@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TreeResponse } from '../models/response.model';
-import {map} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {of} from 'rxjs';
 
 @Injectable()
@@ -20,5 +20,11 @@ export class OptionsStore {
         })
       );
     }
+  }
+
+  allTaskInProject(projectId: number, taskId: number) {
+    return this.http.get<TreeResponse<any>>(`/api/scheduler/project/${projectId}/task`).pipe(
+      map(res => res.content.datalist.filter(i => i.value !== taskId)),
+    );
   }
 }

@@ -11,7 +11,7 @@ import {SchedulerTask} from '../models/scheduler-task.model';
   providers: [SchedulerTaskService],
 })
 export class SchedulerTaskComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'start_date', 'duration', 'actions'];
+  displayedColumns: string[] = ['title', 'start_date', 'duration', 'job_type_value', 'person_name', 'work_hour', 'actions'];
   dataSource = new MatTableDataSource<SchedulerTask>([]);
   count = 0;
   projectId: number;

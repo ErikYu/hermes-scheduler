@@ -21,6 +21,7 @@ export class SchedulerTaskDetailComponent implements OnInit {
     {label: 'BE', value: 2},
   ];
   allPeople = [];
+  allTasks = [];
   constructor(
     private _fb: FormBuilder,
     private _route: ActivatedRoute,
@@ -39,7 +40,8 @@ export class SchedulerTaskDetailComponent implements OnInit {
         project_id: [this.projectId],
         job_type: [null, [Validators.required]],
         person_id: [null],
-        work_hour: [null]
+        work_hour: [null],
+        depend_id: [null],
       });
     } else {
       this._taskDetail.getSchedulerTask(this.taskId).subscribe(res => {
@@ -51,7 +53,8 @@ export class SchedulerTaskDetailComponent implements OnInit {
           project_id: [this.projectId],
           job_type: [res.job_type, [Validators.required]],
           person_id: [res.person_id],
-          work_hour: [res.work_hour]
+          work_hour: [res.work_hour],
+          depend_id: [res.depend_id],
         });
       });
     }
@@ -60,10 +63,8 @@ export class SchedulerTaskDetailComponent implements OnInit {
     this.projectId = +this._route.snapshot.paramMap.get('projectId');
     this.taskId = +this._route.snapshot.paramMap.get('taskId');
     this.createForm();
-    this._options.allPerson().subscribe(res => {
-      console.log(res);
-      this.allPeople = res;
-    });
+    this._options.allPerson().subscribe(res => this.allPeople = res);
+    this._options.allTaskInProject(this.projectId, this.taskId).subscribe(res => this.allTasks = res);
   }
   save() {
     if (this.validateForm.invalid) {

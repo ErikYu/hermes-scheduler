@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import '../../assets/lib/gantt/dhtmlxgantt.js';
 import '../../assets/lib/gantt/ext/dhtmlxgantt_grouping.js';
 import '../../assets/lib/gantt/ext/dhtmlxgantt_tooltip.js';
+import '../../assets/lib/gantt/ext/dhtmlxgantt_fullscreen.js';
 import '../../assets/lib/gantt/locale/locale_cn.js';
 
 import { TaskGanttService, OwnerOption } from './task-gantt.service';
@@ -54,6 +55,10 @@ export class TaskGanttComponent implements OnInit {
     }));
     this._tastGantt.saveTasks(this.projectId, this.data).subscribe(res => {
     });
+  }
+
+  expand() {
+    gantt.expand();
   }
 
   getAllocatedValue(tasks, resource) {
@@ -305,10 +310,10 @@ export class TaskGanttComponent implements OnInit {
     };
     // gantt.config.round_dnd_dates = false;
     gantt.init(this.ganttContainer.nativeElement);
-    gantt.config.date_scale = '%F, %Y';
-    gantt.config.subscales = [
-      { unit: 'day', step: 1, date: '%j' }
-    ];
+    gantt.config.date_scale = '%m-%d';
+    // gantt.config.subscales = [
+    //   { unit: 'day', step: 1, date: '%j' }
+    // ];
     // 这里的section_owner中的owner来自sections中的name
     gantt.locale.labels['section_owner'] = '人员';
     gantt.locale.labels['section_detail'] = '详情';

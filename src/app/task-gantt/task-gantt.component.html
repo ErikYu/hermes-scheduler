@@ -4,7 +4,9 @@
       <span>Gantt</span>
       <div>
         <button mat-flat-button color="primary" (click)="showGroups()">{{grouped ? 'Raw' : 'Group by owner'}}</button>
-        <button mat-flat-button color="primary" (click)="saveData()">Save</button>
+        <button mat-flat-button color="primary" (click)="saveData()"><mat-icon>save</mat-icon> Save</button>
+        <button mat-flat-button color="accent" (click)="expand()"><mat-icon>expand</mat-icon> Expand</button>
+        <!--<button mat-flat-button color="accent" (click)="expand()"><mat-icon>toc</mat-icon> Filter</button>-->
       </div>
     </div>
   </ng-template>

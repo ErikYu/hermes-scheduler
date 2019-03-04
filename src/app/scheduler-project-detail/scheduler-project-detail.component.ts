@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { parse } from 'date-fns';
+import {format, parse} from 'date-fns';
 import { SchedulerProject } from '../models/scheduler-project.model';
 import { SchedulerProjectDetailService } from './scheduler-project-detail.service';
 
@@ -34,12 +34,14 @@ export class SchedulerProjectDetailComponent implements OnInit {
     if (this.validateForm.invalid) {
       return;
     }
+    const data = this.validateForm.value;
+    data['deadline'] = format(data['deadline'], 'YYYY-MM-DD HH:mm:ss');
     if (this._data.id === 0) {
-      this._projectDetail.addProject({data: this.validateForm.value}).subscribe(res => {
+      this._projectDetail.addProject({data}).subscribe(res => {
         this.discard();
       });
     } else {
-      this._projectDetail.updateProject(this._data.id, {data: this.validateForm.value}).subscribe(res => {
+      this._projectDetail.updateProject(this._data.id, {data}).subscribe(res => {
         this.discard();
       });
     }

@@ -1,12 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Scheduler</span>
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <button mat-button [matMenuTriggerFor]="menu">Scheduler</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item [routerLink]="'/scheduler/person'" routerLinkActive="active">Person</button>
       <button mat-menu-item [routerLink]="'/scheduler/project'" routerLinkActive="active">Project</button>
       <!--<button mat-menu-item [routerLink]="'/scheduler/task'" routerLinkActive="active">Task</button>-->
-      <button mat-menu-item [routerLink]="'/scheduler/gantt'" routerLinkActive="active">Gantt</button>
+      <!--<button mat-menu-item [routerLink]="'/scheduler/gantt'" routerLinkActive="active">Gantt</button>-->
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SchedulerTaskDetailService } from './scheduler-task-detail.service';
 import { OptionsStore } from '../shared/options.store';
-import { parse } from 'date-fns';
+import {format, parse} from 'date-fns';
 
 @Component({
   selector: 'app-scheduler-task-detail',
@@ -70,10 +70,12 @@ export class SchedulerTaskDetailComponent implements OnInit {
     if (this.validateForm.invalid) {
       return;
     }
+    const data = this.validateForm.value;
+    data['start_date'] = format(data['start_date'], 'YYYY-MM-DD HH:mm:ss');
     if (this.taskId === 0) {
-      this._taskDetail.addSchedulerTask({data: this.validateForm.value}).subscribe(res => {});
+      this._taskDetail.addSchedulerTask({data}).subscribe(res => {});
     } else {
-      this._taskDetail.updateSchedulerTask(this.taskId, {data: this.validateForm.value}).subscribe(res => {});
+      this._taskDetail.updateSchedulerTask(this.taskId, {data}).subscribe(res => {});
     }
   }
   back() {

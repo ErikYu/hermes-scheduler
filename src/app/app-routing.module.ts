@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'scheduler/task/:projectId', component: SchedulerTaskComponent},
   {path: 'scheduler/task/:projectId/:taskId', component: SchedulerTaskDetailComponent},
   {path: 'scheduler/project', component: SchedulerProjectComponent},
-  {path: 'scheduler/gantt', component: TaskGanttComponent},
+  {path: 'scheduler/gantt/:projectId', component: TaskGanttComponent},
 ];
 
 @NgModule({

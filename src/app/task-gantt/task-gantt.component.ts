@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {format} from 'date-fns';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { format } from 'date-fns';
 import '../../assets/lib/gantt/dhtmlxgantt.js';
 import '../../assets/lib/gantt/ext/dhtmlxgantt_grouping.js';
 import '../../assets/lib/gantt/ext/dhtmlxgantt_tooltip.js';
@@ -20,9 +21,11 @@ export class TaskGanttComponent implements OnInit {
   grouped: boolean;
   data: GanttData;
   owners: OwnerOption[] = [];
+  projectId: number;
 
   constructor(
     private _tastGantt: TaskGanttService,
+    private _route: ActivatedRoute,
   ) { }
 
   @ViewChild('gantt_here') ganttContainer: ElementRef;
@@ -89,7 +92,7 @@ export class TaskGanttComponent implements OnInit {
 
 
     this._tastGantt.getAllOwners().subscribe(res => {
-      this.owners = res.content.datalist;
+      this.owners = res;
       // 双击detail页面
       gantt.config.lightbox.sections = [
         { name: 'description', height: 38, map_to: 'text', type: 'textarea', focus: true },
@@ -98,7 +101,8 @@ export class TaskGanttComponent implements OnInit {
         { name: 'time', type: 'duration', map_to: 'auto' }
       ];
     });
-    this._tastGantt.getTasks().subscribe(res => {
+    this.projectId = +this._route.snapshot.paramMap.get('projectId');
+    this._tastGantt.getTasks(this.projectId).subscribe(res => {
       this.data = res.content.data;
       gantt.parse(this.data);
     });

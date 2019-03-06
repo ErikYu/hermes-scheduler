@@ -10,6 +10,7 @@ import { MaterialsModule } from './materials/materials.module';
 import { ComponentsModule } from './components/components.module';
 import { OptionsStore } from './shared/options.store';
 import { NoopInterceptor } from './shared/interceptors';
+import { LoginComponent } from './login/login.component';
 import { TaskGanttComponent } from './task-gantt/task-gantt.component';
 import { SchedulerTaskComponent } from './scheduler-task/scheduler-task.component';
 import { SchedulerPersonComponent } from './scheduler-person/scheduler-person.component';
@@ -21,6 +22,7 @@ import { SchedulerTaskDetailComponent } from './scheduler-task-detail/scheduler-
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     TaskGanttComponent,
     SchedulerTaskComponent,
     SchedulerPersonComponent,

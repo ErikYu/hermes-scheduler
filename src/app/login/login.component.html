@@ -1,0 +1,23 @@
+<div class="login-mask"></div>
+<mat-card class="login-card">
+  <mat-card-content>
+    <div class="logo-container"></div>
+
+    <div class="login-container">
+      <form [formGroup]="validateForm">
+        <mat-form-field>
+          <input matInput placeholder="User Name" formControlName="login">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type='password' placeholder="Password" formControlName="password">
+        </mat-form-field>
+        <div style="margin-bottom: 20px;">
+          <mat-checkbox>Remember me</mat-checkbox>
+        </div>
+      </form>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="login()">Sign in</button>
+  </mat-card-content>
+  <button mat-fab id='register-btn'>Sign up</button>
+</mat-card>

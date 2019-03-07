@@ -7,6 +7,20 @@
       <!--<button mat-menu-item [routerLink]="'/scheduler/task'" routerLinkActive="active">Task</button>-->
       <!--<button mat-menu-item [routerLink]="'/scheduler/gantt'" routerLinkActive="active">Gantt</button>-->
     </mat-menu>
+    <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="userMenu">User</button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item >
+        <mat-icon>settings</mat-icon>
+        <span>Setting</span>
+      </button>
+      <button mat-menu-item (click)="signOut()" >
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Sign Out</span>
+      </button>
+      <!--<button mat-menu-item [routerLink]="'/scheduler/task'" routerLinkActive="active">Task</button>-->
+      <!--<button mat-menu-item [routerLink]="'/scheduler/gantt'" routerLinkActive="active">Gantt</button>-->
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
 <!--<app-task-gantt></app-task-gantt>-->

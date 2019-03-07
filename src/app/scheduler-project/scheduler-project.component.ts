@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material';
 import { SchedulerProject } from '../models/scheduler-project.model';
 import { Router } from '@angular/router';
 import { SchedulerProjectDetailComponent } from '../scheduler-project-detail/scheduler-project-detail.component';
-import {  ScheduleProjectService} from './schedule-project.service';
+import { ScheduleProjectService } from './schedule-project.service';
+import { OptionsStore } from '../shared/options.store';
 
 @Component({
   selector: 'app-scheduler-project',
@@ -19,6 +20,7 @@ export class SchedulerProjectComponent implements OnInit {
     private _router: Router,
     private _dialog: MatDialog,
     private _project: ScheduleProjectService,
+    private _options: OptionsStore,
   ) {}
 
   getData(e) {
@@ -38,7 +40,7 @@ export class SchedulerProjectComponent implements OnInit {
   }
 
   create() {
-    const dialogRef = this.openDialog({id: 0, name: null});
+    const dialogRef = this.openDialog({id: 0, name: null, person_rels: []});
     dialogRef.afterClosed().subscribe(result => {
       this.getData({pageSize: 10, pageIndex: 0});
     });

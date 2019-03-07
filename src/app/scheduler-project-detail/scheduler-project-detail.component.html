@@ -15,6 +15,11 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <mat-form-field style="width: 100%;">
+      <mat-select placeholder="Person" formControlName="person_rels" multiple>
+        <mat-option *ngFor="let person of allPerson" [value]="person.value">{{person.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>

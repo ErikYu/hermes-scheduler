@@ -10,16 +10,16 @@ export class OptionsStore {
     private http: HttpClient,
   ) {}
   allPerson() {
-    if (localStorage.getItem('allPerson')) {
-      return of(JSON.parse(localStorage.getItem('allPerson')));
-    } else {
+    // if (localStorage.getItem('allPerson')) {
+    //   return of(JSON.parse(localStorage.getItem('allPerson')));
+    // } else {
       return this.http.get<TreeResponse<any>>('/api/scheduler/options/person').pipe(
         map(res => {
           localStorage.setItem('allPerson', JSON.stringify(res.content.datalist));
           return res.content.datalist;
         })
       );
-    }
+    // }
   }
 
   allTaskInProject(projectId: number, taskId: number) {

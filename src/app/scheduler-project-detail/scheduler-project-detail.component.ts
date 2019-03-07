@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {format, parse} from 'date-fns';
 import { SchedulerProject } from '../models/scheduler-project.model';
 import { SchedulerProjectDetailService } from './scheduler-project-detail.service';
+import { OptionsStore } from '../shared/options.store';
 
 @Component({
   selector: 'app-scheduler-project-detail',
@@ -13,11 +14,13 @@ import { SchedulerProjectDetailService } from './scheduler-project-detail.servic
 })
 export class SchedulerProjectDetailComponent implements OnInit {
   validateForm: FormGroup;
+  allPerson = [];
   constructor(
     private _fb: FormBuilder,
     private _projectDetail: SchedulerProjectDetailService,
     private _dialogRef: MatDialogRef<SchedulerProjectDetailComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: SchedulerProject,
+    private _options: OptionsStore,
   ) { }
 
   createForm() {
@@ -26,7 +29,8 @@ export class SchedulerProjectDetailComponent implements OnInit {
       name: [this._data.name, [Validators.required, Validators.maxLength(20)]],
       sub_name: [this._data.sub_name, [Validators.maxLength(20)]],
       description: [this._data.description, [Validators.maxLength(100)]],
-      deadline: [this._data.deadline ? parse(this._data.deadline) : null]
+      deadline: [this._data.deadline ? parse(this._data.deadline) : null],
+      person_rels: [this._data.person_rels]
     });
   }
 
@@ -53,6 +57,7 @@ export class SchedulerProjectDetailComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this._options.allPerson().subscribe(res => this.allPerson = res);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { format } from 'date-fns';
 import '../../assets/lib/gantt/dhtmlxgantt.js';
@@ -8,6 +8,7 @@ import '../../assets/lib/gantt/ext/dhtmlxgantt_fullscreen.js';
 import '../../assets/lib/gantt/locale/locale_cn.js';
 
 import { TaskGanttService, OwnerOption } from './task-gantt.service';
+import { SchedulerTaskDetailService } from '../scheduler-task-detail/scheduler-task-detail.service';
 
 import { GanttData, Task } from '../models/task-gantt.model';
 
@@ -21,19 +22,20 @@ gantt.attachEvent('onGanttReady', () => a = 1);
   selector: 'app-task-gantt',
   templateUrl: './task-gantt.component.html',
   styleUrls: ['./task-gantt.component.less'],
-  providers: [TaskGanttService],
+  providers: [TaskGanttService, SchedulerTaskDetailService],
 })
-export class TaskGanttComponent implements OnInit {
+export class TaskGanttComponent implements OnInit, OnDestroy {
 
   grouped: boolean;
   data: GanttData;
   owners: OwnerOption[] = [];
   projectId: number;
-  ganttOk = false;
+  eventAddTask;
 
   constructor(
     private _tastGantt: TaskGanttService,
     private _route: ActivatedRoute,
+    private _taskDetail: SchedulerTaskDetailService,
   ) { }
 
   @ViewChild('gantt_here') ganttContainer: ElementRef;
@@ -59,6 +61,16 @@ export class TaskGanttComponent implements OnInit {
       start_date: format(i.start_date, 'YYYY-MM-DD HH:mm:ss')
     }));
     this._tastGantt.saveTasks(this.projectId, this.data).subscribe(res => {
+      this._tastGantt.getTasks(this.projectId).subscribe(res1 => {
+        this.data = res1.content.data;
+        gantt.clearAll();
+        gantt.parse(this.data);
+        gantt.$resourcesStore.parse(this.owners.map(i => ({
+          id: i.key,
+          text: i.label,
+          parent: null
+        })));
+      });
     });
   }
 
@@ -302,6 +314,11 @@ export class TaskGanttComponent implements OnInit {
 
   }
 
+  detachEvents() {
+    // scheduler.detachEvent(this.editBoxEventId);
+    gantt.detachEvent(this.eventAddTask);
+  }
+
   ngOnInit() {
     if (a) {
       gantt.clearAll();
@@ -347,7 +364,21 @@ export class TaskGanttComponent implements OnInit {
       {name: 'add', width: 44}
     ];
 
-
+    this.eventAddTask = gantt.attachEvent('onAfterTaskAdd', (id, item) => {
+      console.log(item);
+      this.data.data.push({
+        newly: true,
+        id: item.id,
+        start_date: item.start_date,
+        duration: item.duration,
+        text: item.text,
+        detail: item.detail,
+        owner: JSON.parse(JSON.stringify(item.owner)),
+        progress: 0,
+        parent: +item.parent
+      });
+      gantt.parse(this.data);
+    });
 
     this._tastGantt.getAllOwners().subscribe(res => {
       this.owners = res;
@@ -370,7 +401,14 @@ export class TaskGanttComponent implements OnInit {
     this._tastGantt.getTasks(this.projectId).subscribe(res => {
       this.data = res.content.data;
       gantt.parse(this.data);
+      gantt.eachTask((task) => {
+          task.$open = true;
+      });
     });
+  }
+
+  ngOnDestroy() {
+    this.detachEvents();
   }
 
 }

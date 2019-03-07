@@ -9,4 +9,5 @@ export interface SchedulerProject {
   finished_count?: number;
   unassigned_count?: number;
   confirmDelete?: boolean;
+  person_rels: number[];
 }

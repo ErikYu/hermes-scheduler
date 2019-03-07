@@ -1,4 +1,5 @@
 export interface Task {
+  newly?: boolean;
   id: number;
   start_date: string;
   end_date?: string;

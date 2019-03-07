@@ -11,7 +11,11 @@ import { TaskGanttService, OwnerOption } from './task-gantt.service';
 
 import { GanttData, Task } from '../models/task-gantt.model';
 
-declare var gantt: any;
+// declare var gantt: any;
+
+const gantt = Gantt.getGanttInstance();
+let a = 0;
+gantt.attachEvent('onGanttReady', () => a = 1);
 
 @Component({
   selector: 'app-task-gantt',
@@ -25,6 +29,7 @@ export class TaskGanttComponent implements OnInit {
   data: GanttData;
   owners: OwnerOption[] = [];
   projectId: number;
+  ganttOk = false;
 
   constructor(
     private _tastGantt: TaskGanttService,
@@ -298,7 +303,9 @@ export class TaskGanttComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (a) {
+      gantt.clearAll();
+    }
     this.another();
     gantt.config.resource_property = 'owner';
     gantt.config.work_time = true;

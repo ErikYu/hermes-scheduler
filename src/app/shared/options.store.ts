@@ -22,6 +22,12 @@ export class OptionsStore {
     // }
   }
 
+  allPersonByProject(projectId: number) {
+    return this.http.get<TreeResponse<any>>(`/api/scheduler/project/${projectId}/person`).pipe(
+      map(res => res.content.datalist)
+    );
+  }
+
   allTaskInProject(projectId: number, taskId: number) {
     return this.http.get<TreeResponse<any>>(`/api/scheduler/project/${projectId}/task`).pipe(
       map(res => res.content.datalist.filter(i => i.value !== taskId)),

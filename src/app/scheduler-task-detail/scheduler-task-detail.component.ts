@@ -63,7 +63,7 @@ export class SchedulerTaskDetailComponent implements OnInit {
     this.projectId = +this._route.snapshot.paramMap.get('projectId');
     this.taskId = +this._route.snapshot.paramMap.get('taskId');
     this.createForm();
-    this._options.allPerson().subscribe(res => this.allPeople = res);
+    this._options.allPersonByProject(this.projectId).subscribe(res => this.allPeople = res);
     this._options.allTaskInProject(this.projectId, this.taskId).subscribe(res => this.allTasks = res);
   }
   save() {

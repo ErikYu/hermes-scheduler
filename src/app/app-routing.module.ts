@@ -7,7 +7,7 @@ import { TaskGanttComponent } from './task-gantt/task-gantt.component';
 import { SchedulerProjectComponent } from './scheduler-project/scheduler-project.component';
 import { SchedulerTaskDetailComponent } from './scheduler-task-detail/scheduler-task-detail.component';
 import { LoginComponent } from './login/login.component';
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'scheduler/task/:projectId/:taskId', component: SchedulerTaskDetailComponent},
   {path: 'scheduler/project', component: SchedulerProjectComponent},
   {path: 'scheduler/gantt/:projectId', component: TaskGanttComponent},
+  {path: 'user/profile', component: UserProfileComponent},
   { path: '', redirectTo: 'scheduler/project', pathMatch: 'full' },
 ];
 

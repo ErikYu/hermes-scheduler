@@ -18,6 +18,7 @@ import { SchedulerPersonDetailComponent } from './scheduler-person-detail/schedu
 import { SchedulerProjectComponent } from './scheduler-project/scheduler-project.component';
 import { SchedulerProjectDetailComponent } from './scheduler-project-detail/scheduler-project-detail.component';
 import { SchedulerTaskDetailComponent } from './scheduler-task-detail/scheduler-task-detail.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SchedulerTaskDetailComponent } from './scheduler-task-detail/scheduler-
     SchedulerPersonDetailComponent,
     SchedulerProjectComponent,
     SchedulerProjectDetailComponent,
-    SchedulerTaskDetailComponent
+    SchedulerTaskDetailComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

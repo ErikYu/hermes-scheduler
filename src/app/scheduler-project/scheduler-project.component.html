@@ -17,22 +17,22 @@
       </mat-card-subtitle>
 
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content style="margin-bottom: 45px;">
       <p><b>Desc:</b> {{project.description}}</p>
       <p><b>Deadline:</b> {{project.deadline}}</p>
       <p><b>Status:</b> {{project.finished_count}} / {{project.task_count}}</p>
       <p><b>Unassigned:</b> {{project.unassigned_count}}</p>
     </mat-card-content>
-    <!--<mat-card-footer>-->
-      <mat-card-actions>
-        <button mat-flat-button color="accent" (click)="gantt(project.id)">Gantt</button>
-        <button mat-stroked-button color="primary" (click)="edit(project)">Edit</button>
-        <button *ngIf="!project.confirmDelete" style="float: right" mat-stroked-button color="warn" (click)="delete(project)">Delete</button>
-        <button *ngIf="project.confirmDelete" style="float: right" mat-flat-button color="warn" (click)="delete(project)">Delete</button>
-      </mat-card-actions>
-    <!--</mat-card-footer>-->
+    <mat-card-actions style="position:absolute; bottom: 20px; left: 20px; right: 10px">
+      <button mat-flat-button color="accent" (click)="gantt(project.id)">Gantt</button>
+      <button mat-stroked-button color="primary" (click)="edit(project)">Edit</button>
+      <button *ngIf="!project.confirmDelete" style="float: right" mat-stroked-button color="warn" (click)="delete(project)">Delete</button>
+      <button *ngIf="project.confirmDelete" style="float: right" mat-flat-button color="warn" (click)="delete(project)">Delete</button>
+    </mat-card-actions>
   </mat-card>
-  <div (click)="create()" matRipple style="display: flex; align-items: center; justify-content: center; width: 20%; height: 160px; background: #fff; cursor: pointer;">
-    +
-  </div>
+  <mat-card matRipple (click)="create()" style="width: 20%; margin-right: 10px; margin-bottom: 10px; cursor: pointer;">
+    <mat-card-content style="height: 100%; display: flex; align-items: center; justify-content: center;">
+      <mat-icon style="font-size: 90px; width: 90px; height: 90px; user-select: none;">add</mat-icon>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -3,12 +3,21 @@
     <div style="display: flex; align-items: center; justify-content: space-between">
       <span>Gantt</span>
       <div>
-        <button mat-flat-button color="primary" (click)="showGroups()">{{grouped ? 'Raw' : 'Group by owner'}}</button>
-        <button mat-flat-button color="primary" (click)="saveData()"><mat-icon>save</mat-icon> Save</button>
-        <button mat-flat-button color="accent" (click)="expand()"><mat-icon>expand</mat-icon> Expand</button>
+        <!--<button mat-flat-button color="primary" (click)="showGroups()">{{grouped ? 'Raw' : 'Group by owner'}}</button>-->
+        <!--<button mat-flat-button color="primary" (click)="saveData()"><mat-icon>save</mat-icon> Save</button>-->
+        <!--<button mat-flat-button color="accent" (click)="expand()"><mat-icon>expand</mat-icon> Expand</button>-->
         <!--<button mat-flat-button color="accent" (click)="expand()"><mat-icon>toc</mat-icon> Filter</button>-->
       </div>
     </div>
   </ng-template>
 </app-header>
+<div class="gantt-header">
+  <button mat-button (click)="showGroups()"><mat-icon>group</mat-icon> {{grouped ? 'Raw' : 'Group'}}</button>
+  <button mat-button (click)="saveData()"><mat-icon>save</mat-icon> Save</button>
+  <button mat-button (click)="expand()"><mat-icon>fullscreen</mat-icon> Fullscreen</button>
+  <button mat-button [matMenuTriggerFor]="filterMenu"><mat-icon>filter_list</mat-icon> Filter</button>
+  <mat-menu #filterMenu="matMenu">
+    <button mat-menu-item>Project</button>
+  </mat-menu>
+</div>
 <div #gantt_here style='float: left; width: 100%; height: 750px;'></div>
